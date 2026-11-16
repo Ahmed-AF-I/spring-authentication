@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: registry.redhat.io/rhel9/postgresql-16:latest
+    container_name: rhel-postgres
+    shm_size: 256m
+    environment:
+      POSTGRESQL_USER: ${DATABASE_USER_NAME}
+      POSTGRESQL_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRESQL_DATABASE: auth_database
+    ports:
+      - "5432:5432"
+    volumes:
+      - /Data/postgres_data:/var/lib/pgsql/data:Z
+    restart: unless-stopped
